@@ -13,7 +13,7 @@ fetch('hirayamap_data.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(function(item) {
-        var color = colors[item.音調体系 - 1]; // 音調体系に対応する色を取得
+        var color = colors[item.音調コード - 1]; // 音調体系に対応する色を取得
         L.circleMarker([item.緯度, item.経度], { color: color }).addTo(map)
             .bindPopup(item.集落名 + ": 音調体系 " + item.音調体系);
     });
