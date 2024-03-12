@@ -15,7 +15,7 @@ fetch('hirayamap_data.json')
     data.forEach(function(item) {
         var color = colors[item.音調コード - 1]; // 音調体系に対応する色を取得
         L.circleMarker([item.緯度, item.経度], { color: color }).addTo(map)
-            .bindPopup(item.集落名 + item.音調体系);
+            .bindPopup(item.集落名 + ": " + item.音調体系);
     });
 })
 .catch(error => console.error('Error loading the data:', error));
