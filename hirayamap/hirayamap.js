@@ -9,7 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var colors = ["#FFB300", "#803E75", "#FF6800", "#A6BDD7", "#C10020", "#CEA262", "#817066", "#007D34", "#F6768E", "#00538A", "#FF7A5C", "#53377A", "#FF8E00", "#B32851"];
 
 // データの読み込みとプロット
-fetch('./hirayamap/hirayamap_data.json')
+fetch('hirayamap_data.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(function(item) {
