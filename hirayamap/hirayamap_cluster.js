@@ -16,7 +16,7 @@ fetch('./hirayamap/hirayamap_data.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(function(item) {
-        var color = colors[item.音調体系 - 1]; // 音調体系に応じた色を取得
+        var color = colors[item.音調コード - 1]; // 音調体系に応じた色を取得
         var marker = L.circleMarker([item.緯度, item.経度], {
             color: color, // 外周の色
             fillColor: color, // 塗りつぶしの色
