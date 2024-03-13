@@ -16,11 +16,16 @@ fetch('./hirayamap/hirayamap_data.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(function(item) {
-        var marker = L.marker([item.緯度, item.経度]); // 各データポイントに対するマーカーを作成
+        var color = colors[item.音調体系 - 1]; // 音調体系に応じた色を取得
+        var marker = L.circleMarker([item.緯度, item.経度], {
+            color: color, // 外周の色
+            fillColor: color, // 塗りつぶしの色
+            fillOpacity: 0.5, // 塗りつぶしの透明度
+            radius: 8 // マーカーの半径
+        });
         marker.bindPopup(item.集落名 + ": 音調体系 " + item.音調体系);
         markers.addLayer(marker); // マーカーをクラスタグループに追加
     });
     map.addLayer(markers); // クラスタグループを地図に追加
 })
-
 .catch(error => console.error('Error loading the data:', error));
