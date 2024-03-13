@@ -20,7 +20,6 @@ fetch('./hirayamap/hirayamap_data.json')
         L.circleMarker([item.緯度, item.経度], { color: color }).addTo(map)
             .bindPopup(item.集落名 + ": " + item.音調体系);
     });
+    map.addLayer(markers);
 })
-markers.addLayer(point);
-map.addLayer(markers);
 .catch(error => console.error('Error loading the data:', error));
