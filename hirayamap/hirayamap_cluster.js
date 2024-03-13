@@ -5,23 +5,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+// 音調体系に応じた色の定義
+var colors = ["#FFB300", "#803E75", "#FF6800", "#A6BDD7", "#C10020", "#CEA262", "#817066", "#007D34", "#F6768E", "#00538A", "#FF7A5C", "#53377A", "#FF8E00", "#B32851"];
+
 // 色ごとにクラスタグループを用意する
-var clusterGroups = {
-    "#FFB300": L.markerClusterGroup(),
-    "#803E75": L.markerClusterGroup(),
-    "#FF6800": L.markerClusterGroup(),
-    "#A6BDD7": L.markerClusterGroup(),
-    "#C10020": L.markerClusterGroup(), 
-    "#CEA262": L.markerClusterGroup(),
-    "#817066": L.markerClusterGroup(),
-    "#007D34": L.markerClusterGroup(),
-    "#F6768E": L.markerClusterGroup(),
-    "#00538A": L.markerClusterGroup(),
-    "#FF7A5C": L.markerClusterGroup(),
-    "#53377A": L.markerClusterGroup(),
-    "#FF8E00": L.markerClusterGroup(),
-    "#B32851": L.markerClusterGroup(),
-};
+var clusterGroups = {};
+colors.forEach(function(color) {
+    clusterGroups[color] = L.markerClusterGroup();
+});
 
 fetch('./hirayamap/hirayamap_data.json')
 .then(response => response.json())
@@ -42,8 +33,8 @@ fetch('./hirayamap/hirayamap_data.json')
     });
 
     // すべてのクラスタグループを地図に追加
-    for(var color in clusterGroups) {
-        map.addLayer(clusterGroups[color]);
-    }
+    Object.values(clusterGroups).forEach(function(group) {
+        map.addLayer(group);
+    });
 })
 .catch(error => console.error('Error loading the data:', error));
