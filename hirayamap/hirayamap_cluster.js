@@ -12,7 +12,7 @@ var colors = ["#FFB300", "#803E75", "#FF6800", "#A6BDD7", "#C10020", "#CEA262", 
 var markers = L.markerClusterGroup();
 
 // データの読み込みとプロット
-fetch('hirayamap_data.json')
+fetch('./hirayamap/hirayamap_data.json')
 .then(response => response.json())
 .then(data => {
     data.forEach(function(item) {
