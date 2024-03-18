@@ -24,7 +24,7 @@ fetch('./hirayamap/hirayamap_data.json')
 var legend = L.control({position: 'bottomright'}); // 凡例の位置を指定
 
 legend.onAdd = function (map) {
-	var div = L.DomUtil.create('div', 'info legend'),
+	var div = L.DomUtil.create('div', 'info legend');
 	div.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // 背景色を半透明の白に設定
 	div.style.padding = '6px'; // 内側の余白を設定
 	div.style.borderRadius = '4px'; // 角の丸みを設定
