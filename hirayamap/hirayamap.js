@@ -34,7 +34,7 @@ legend.onAdd = function (map) {
 	for (var i = 0; i < grades.length; i++) {
 		div.innerHTML +=
 	'<i style="background:' + colors[i] + '; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> ' +
-	'音調 ' + grades[i] + '<br>';
+	grades[i] + '<br>';
 }
 
 return div;
