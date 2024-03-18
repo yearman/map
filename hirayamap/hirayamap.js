@@ -25,6 +25,10 @@ var legend = L.control({position: 'bottomright'}); // 凡例の位置を指定
 
 legend.onAdd = function (map) {
 	var div = L.DomUtil.create('div', 'info legend'),
+	div.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // 背景色を半透明の白に設定
+	div.style.padding = '6px'; // 内側の余白を設定
+	div.style.borderRadius = '4px'; // 角の丸みを設定
+	div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)'; // シャドウを設定
 	grades = ["東京式音調", "特殊音調1A", "曖昧音調1", "一型音調", "京阪式音調", "特殊音調1B", "特殊音調2", "曖昧音調2", "特殊音調3D", "特殊音調3C", "特殊音調3E", "特殊音調3A", "特殊音調3B", "特殊音調3F"]; // 例として音調体系を使用
 	
 	// 凡例の見出し
