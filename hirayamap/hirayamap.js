@@ -2,7 +2,7 @@
 var map = L.map('map').setView([33.0, 130.0], 7); // 九州・沖縄の範囲を表示
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
+		attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
 // 音調体系に応じた色の定義
@@ -12,33 +12,33 @@ var colors = ["#FFB300", "#803E75", "#FF6800", "#A6BDD7", "#C10020", "#CEA262", 
 fetch('./hirayamap/hirayamap_data.json')
 .then(response => response.json())
 .then(data => {
-    data.forEach(function(item) {
-        var color = colors[item.音調コード - 1]; // 音調体系に対応する色を取得
-        L.circleMarker([item.緯度, item.経度], { color: color }).addTo(map)
-            .bindPopup(item.集落名 + ": " + item.音調体系);
-    });
+		data.forEach(function(item) {
+				var color = colors[item.音調コード - 1]; // 音調体系に対応する色を取得
+				L.circleMarker([item.緯度, item.経度], { color: color }).addTo(map)
+				.bindPopup(item.集落名 + ": " + item.音調体系);
+		});
 })
 .catch(error => console.error('Error loading the data:', error));
 
-// 凡例を追加
-var legend = L.control({position: 'bottomright'});
+// 凡例を追加するカスタムコントロールを作成
+var legend = L.control({position: 'bottomright'}); // 凡例の位置を指定
 
 legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], // 音調コードの例
-        labels = [#FFB300", "#803E75", "#FF6800", "#A6BDD7", "#C10020", "#CEA262", "#817066", "#007D34", "#F6768E", "#00538A", "#FF7A5C", "#53377A", "#FF8E00", "#B32851"];
+	var div = L.DomUtil.create('div', 'info legend'),
+	grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]; // 例として音調コードを使用
+	
+	// 凡例の見出し
+	div.innerHTML += '<h4>音調体系</h4>';
+	
+	// 各音調体系の色とラベルを追加
+	for (var i = 0; i < grades.length; i++) {
+		div.innerHTML +=
+	'<i style="background:' + colors[i] + '; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> ' +
+	'音調 ' + grades[i] + '<br>';
+}
 
-    // 凡例のタイトル
-    div.innerHTML += '<h4>音調体系</h4>';
-
-    // 色とラベルを定義
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + colors[i] + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-
-    return div;
+return div;
 };
 
+// 凡例を地図に追加
 legend.addTo(map);
