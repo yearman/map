@@ -19,3 +19,26 @@ fetch('./hirayamap/hirayamap_data.json')
     });
 })
 .catch(error => console.error('Error loading the data:', error));
+
+// 凡例を追加
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], // 音調コードの例
+        labels = [#FFB300", "#803E75", "#FF6800", "#A6BDD7", "#C10020", "#CEA262", "#817066", "#007D34", "#F6768E", "#00538A", "#FF7A5C", "#53377A", "#FF8E00", "#B32851"];
+
+    // 凡例のタイトル
+    div.innerHTML += '<h4>音調体系</h4>';
+
+    // 色とラベルを定義
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + colors[i] + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);
